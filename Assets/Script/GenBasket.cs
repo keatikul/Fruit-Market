@@ -17,16 +17,28 @@ public class GenBasket : MonoBehaviour
     public bool ReadytoUse = false;
     public bool ReadytoAdd = false;
     public int m;
+    public int checkint = 0;
+    GameObject basket;
+    public Transform ParentBasket;
+   
+
 
     public List<int> n_orderdata = new List<int>();
-   
+
+    public List<RandomOrderinBasket> randomOrderinBaskets = new List<RandomOrderinBasket>();
+    public List<RandomOrderinBasket> randomOrderinBaskets2 = new List<RandomOrderinBasket>();
+    public List<RandomOrderinBasket> randomOrderinBaskets3 = new List<RandomOrderinBasket>();
+    public List<RandomOrderinBasket> randomOrderinBaskets4 = new List<RandomOrderinBasket>();
+
 
     private void Start()
     {
         CreateBasket();
+        
         MakeSingleton();
         //RandomFromList();
-        
+        //GenFruit.instantiateGenFruit.CheckOrderdata();
+        //GenFruit.instantiateGenFruit.RandomMatterialFruit();
     }
 
     public void MakeSingleton()
@@ -39,12 +51,80 @@ public class GenBasket : MonoBehaviour
 
     public void CreateBasket()
     {
-        for (int i = 0; i < colLength * rowLength; i++)
+        //
+        //while(checkint < 4)
         {
-            Instantiate(Basket, new Vector3(Xstart + (Xspace * (i % colLength)), Ystart + (Yspace * (i / colLength))), Quaternion.identity);
-            Basket.name = "Basket: " + numOfbasket++;
-            //firstCol.Add(Basket);
+            for (int i = 0; i < colLength * rowLength; i++)
+            {
+                basket = Instantiate(Basket, new Vector3(Xstart + (Xspace * (i % colLength)), Ystart + (Yspace * (i / colLength))), Quaternion.identity, ParentBasket);
+                
+                Basket.name = "Basket: " + numOfbasket++;
+                randomOrderinBaskets.Add(basket.GetComponent<RandomOrderinBasket>());
+                //firstCol.Add(Basket);
+                //ต้องรู้ว่า int ที่เท่าไหร่คือแถวที่เท่าไหร่ จากนั้นทำ List แยก 4 แถว
+            }
+            for (int i = 0; i < colLength * rowLength; i++)
+            {
+                basket = Instantiate(Basket, new Vector3(-1.7f + (Xspace * (i % colLength)), Ystart + (Yspace * (i / colLength))), Quaternion.identity, ParentBasket);
+                
+                Basket.name = "Basket: " + numOfbasket++;
+                randomOrderinBaskets2.Add(basket.GetComponent<RandomOrderinBasket>());
+                //firstCol.Add(Basket);
+                //ต้องรู้ว่า int ที่เท่าไหร่คือแถวที่เท่าไหร่ จากนั้นทำ List แยก 4 แถว
+            }
+            for (int i = 0; i < colLength * rowLength; i++)
+            {
+                basket = Instantiate(Basket, new Vector3(1.8f + (Xspace * (i % colLength)), Ystart + (Yspace * (i / colLength))), Quaternion.identity, ParentBasket);
+                
+                Basket.name = "Basket: " + numOfbasket++;
+                randomOrderinBaskets3.Add(basket.GetComponent<RandomOrderinBasket>());
+                //firstCol.Add(Basket);
+                //ต้องรู้ว่า int ที่เท่าไหร่คือแถวที่เท่าไหร่ จากนั้นทำ List แยก 4 แถว
+            }
+            for (int i = 0; i < colLength * rowLength; i++)
+            {
+                basket = Instantiate(Basket, new Vector3(5.3f + (Xspace * (i % colLength)), Ystart + (Yspace * (i / colLength))), Quaternion.identity, ParentBasket);
+                
+                Basket.name = "Basket: " + numOfbasket++;
+                randomOrderinBaskets4.Add(basket.GetComponent<RandomOrderinBasket>());
+                //firstCol.Add(Basket);
+                //ต้องรู้ว่า int ที่เท่าไหร่คือแถวที่เท่าไหร่ จากนั้นทำ List แยก 4 แถว
+            }
+            checkint++;
+            GenFruit.instantiateGenFruit.ReadytoAdd = true;
+            GenFruit.instantiateGenFruit.Readytogen = true;
+            
+            //GenFruit.instantiateGenFruit.CheckOrderdata();
+            /*if (checkint == 1)
+            {
+                for (int i = 0; i < colLength * rowLength; i++)
+                {
+                    randomOrderinBaskets.Add(basket.GetComponent<RandomOrderinBasket>());
+                }
+            }
+            if (checkint == 2)
+            {
+                for (int i = 0; i < colLength * rowLength; i++)
+                {
+                    randomOrderinBaskets2.Add(basket.GetComponent<RandomOrderinBasket>());
+                }
+            }
+            if (checkint == 3)
+            {
+                for (int i = 0; i < colLength * rowLength; i++)
+                {
+                    randomOrderinBaskets3.Add(basket.GetComponent<RandomOrderinBasket>());
+                }
+            }
+            if (checkint == 4)
+            {
+                for (int i = 0; i < colLength * rowLength; i++)
+                {
+                    randomOrderinBaskets4.Add(basket.GetComponent<RandomOrderinBasket>());
+                }
+            }*/
         }
+
         firstCol = GameObject.FindGameObjectsWithTag("Basket");
         ReadytoUse = true;
         /*for (int j = 0; j < colLength; j++)
@@ -56,16 +136,52 @@ public class GenBasket : MonoBehaviour
     public void CreateNew()
     {
         this.Ystart = 9.34f;
+        Debug.Log("CreateNew");
         //this.rowLength = 1;
-        for (int i = 0; i < colLength * rowLength; i++)
+        /*for (int i = 0; i < colLength * rowLength; i++)
         {
             Instantiate(Basket, new Vector3(Xstart + (Xspace * (i % colLength)), Ystart + (Yspace * (i / colLength))), Quaternion.identity);
-        }
+        }*/
         /*for (int i = 0; i < n_colLength * n_rowLength; i++)
         {
             Instantiate(Basket, new Vector3(Xstart + (Xspace * (i % colLength)), Ystart + (Yspace * (i / colLength))), Quaternion.identity);
             //Instantiate(Basket, new Vector3(XnewStart + (Xspace * (i % n_colLength)), YnewStart + (Yspace * (i / n_colLength))), Quaternion.identity);
         }*/
+        for (int i = 0; i < n_colLength * n_rowLength; i++)
+        {
+            basket = Instantiate(Basket, new Vector3(Xstart + (Xspace * (i % n_colLength)), Ystart + (Yspace * (i / n_colLength))), Quaternion.identity, ParentBasket);
+            Basket.name = "Basket: " + numOfbasket++;
+            randomOrderinBaskets.Add(basket.GetComponent<RandomOrderinBasket>());
+            //firstCol.Add(Basket);
+            //ต้องรู้ว่า int ที่เท่าไหร่คือแถวที่เท่าไหร่ จากนั้นทำ List แยก 4 แถว
+        }
+        for (int i = 0; i < n_colLength * n_rowLength; i++)
+        {
+            basket = Instantiate(Basket, new Vector3(-1.7f + (Xspace * (i % n_colLength)), Ystart + (Yspace * (i / n_colLength))), Quaternion.identity, ParentBasket);
+
+            Basket.name = "Basket: " + numOfbasket++;
+            randomOrderinBaskets2.Add(basket.GetComponent<RandomOrderinBasket>());
+            //firstCol.Add(Basket);
+            //ต้องรู้ว่า int ที่เท่าไหร่คือแถวที่เท่าไหร่ จากนั้นทำ List แยก 4 แถว
+        }
+        for (int i = 0; i < n_colLength * n_rowLength; i++)
+        {
+            basket = Instantiate(Basket, new Vector3(1.8f + (Xspace * (i % n_colLength)), Ystart + (Yspace * (i / n_colLength))), Quaternion.identity, ParentBasket);
+
+            Basket.name = "Basket: " + numOfbasket++;
+            randomOrderinBaskets3.Add(basket.GetComponent<RandomOrderinBasket>());
+            //firstCol.Add(Basket);
+            //ต้องรู้ว่า int ที่เท่าไหร่คือแถวที่เท่าไหร่ จากนั้นทำ List แยก 4 แถว
+        }
+        for (int i = 0; i < n_colLength * n_rowLength; i++)
+        {
+            basket = Instantiate(Basket, new Vector3(5.3f + (Xspace * (i % n_colLength)), Ystart + (Yspace * (i / n_colLength))), Quaternion.identity, ParentBasket);
+
+            Basket.name = "Basket: " + numOfbasket++;
+            randomOrderinBaskets4.Add(basket.GetComponent<RandomOrderinBasket>());
+            //firstCol.Add(Basket);
+            //ต้องรู้ว่า int ที่เท่าไหร่คือแถวที่เท่าไหร่ จากนั้นทำ List แยก 4 แถว
+        }
     }
 
     private void Update()
@@ -74,18 +190,17 @@ public class GenBasket : MonoBehaviour
         if (ReadytoUse == true)
         {
             CheckOrderInBucket();
+            
             ReadytoUse = false;
         }
         //firstCol[0] = ;
         //if (firstCol[m] == null && ReadytoAdd == false)
-        if (Manager.instantiateManager.Scoore == 3 && ReadytoAdd == false)
+        /*if (Manager.instantiateManager.Scoore == 2 && ReadytoAdd == false)
         {
            AddNew();
+            //AddOrderWrong();
             //ReadytoAdd = true;
-        }
-        
-        
-
+        }*/
     }
     public void CheckOrderInBucket()
     {
@@ -94,7 +209,7 @@ public class GenBasket : MonoBehaviour
         {
             for (int j = 0; j < 4; j++)
             {
-                n_orderdata.Add(firstCol[j].GetComponent<RandomOrderinBasket>().orderdata[i]);
+                //n_orderdata.Add(firstCol[j].GetComponent<RandomOrderinBasket>().orderdata[i]);
             }
             
         /*if (firstCol[0] == null && firstCol[1] == null && firstCol[2] == null)
@@ -138,6 +253,23 @@ public class GenBasket : MonoBehaviour
             } 
         }
         
+    }
+
+    public void AddOrderWrong()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            
+            for (int j = 0; j < firstCol.Length; j++)
+            {
+                if (firstCol[j].GetComponent<RandomOrderinBasket>().wrongorder.Count != 0)
+                {
+                    n_orderdata.Add(firstCol[j].GetComponent<RandomOrderinBasket>().wrongorder[i]);
+                    Debug.Log("Wrong order Add");
+                }
+            }
+        }
+           
     }
 
     /*public void Addnew2()

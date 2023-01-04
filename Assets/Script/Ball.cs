@@ -61,7 +61,7 @@ public class Ball : MonoBehaviour
 		//Ball.Instance.DesactivateRb();
 		startPoint = cam.ScreenToWorldPoint(Input.mousePosition);
 
-
+		
 		trajectory.Show();
 	}
 
@@ -69,13 +69,14 @@ public class Ball : MonoBehaviour
 	{
 		endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
 		distance = Vector2.Distance(startPoint, endPoint);
+		//Debug.Log(distance);
 		direction = (startPoint - endPoint).normalized;
-		force = direction * distance * pushForce;
-
+		force = direction * pushForce;
+		
 		//just for debug
 		Debug.DrawLine(startPoint, endPoint);
 
-
+		
 		trajectory.UpdateDots(pos, force);
 	}
 
@@ -87,6 +88,8 @@ public class Ball : MonoBehaviour
 		Push(force);
 
 		trajectory.Hide();
+		
+		
 	}
 	//End-----------------------------------
 
@@ -101,6 +104,8 @@ public class Ball : MonoBehaviour
 	public void Push(Vector2 force)
 	{
 		rb.AddForce(force, ForceMode2D.Impulse);
+		
+		
 	}
 
 	public void ActivateRb()

@@ -8,26 +8,20 @@ public class BasketMove : MonoBehaviour
     public bool Moving;
     public bool FinishBasket;
     public GameObject[] gos;
-    void Start()
-    {
-        
-    }
+    public static BasketMove instanceBasketMove;
+    public GameObject BasketParents;
 
-    public void TimeCount()
+    private void Start()
     {
-        if (timeValue < 5)
-        {
-            //timeValue += Time.deltaTime;
-        }
-        else
-        {
-            Moving = true;
-            timeValue = 0;
-        }
-        
-        MovingBasket();
+        MakeSingleton();
     }
-
+    void MakeSingleton()
+    {
+       if (instanceBasketMove == null)
+        {
+            instanceBasketMove = this;
+        }
+    }
     public void MovingBasket()
     {
         gos = GameObject.FindGameObjectsWithTag("Basket");
@@ -41,21 +35,10 @@ public class BasketMove : MonoBehaviour
             //GenBasket.genBasket.CreateNew();
             FinishBasket = false;
         }
-        
-
-        if (Moving == true)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y - 1.00f, transform.position.z);
-            Moving = false;
-            //GenBasket.genBasket.CreateNew();
-        }
-
     }
-
+    
+    
     
     // Update is called once per frame
-    void Update()
-    {
-        TimeCount();
-    }
+
 }

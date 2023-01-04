@@ -20,8 +20,13 @@ public class RandomOrderinBasket : MonoBehaviour
     public SpriteRenderer SpriteRenderer3;
 
     public int tagFruit;
+    public float dmg = 0f;
 
     public List<int> orderdata = new List<int>();
+    public List<int> wrongorder = new List<int>();
+    public Sprite[] spritesArray;
+    
+    //public List<GameObject> Heart = new List<GameObject>();
 
     public static RandomOrderinBasket InstanceRandom;
 
@@ -69,33 +74,42 @@ public class RandomOrderinBasket : MonoBehaviour
         {
             tagFruit = 1;
             Destroy(collision.gameObject);
-            GenFruit.instantiateGenFruit.RandomMatterialFruit();
+            CheckIsCorrect();
+            //GenFruit.instantiateGenFruit.RandomMatterialFruit();
         }
         if (collision.gameObject.name == "2(Clone)")
         {
             tagFruit = 2;
             Destroy(collision.gameObject);
-            GenFruit.instantiateGenFruit.RandomMatterialFruit();
+            CheckIsCorrect();
+            //GenFruit.instantiateGenFruit.RandomMatterialFruit();
         }
         if (collision.gameObject.name == "3(Clone)")
         {
             tagFruit = 3;
             Destroy(collision.gameObject);
-            GenFruit.instantiateGenFruit.RandomMatterialFruit();
+            CheckIsCorrect();
+            //GenFruit.instantiateGenFruit.RandomMatterialFruit();
         }
         if (collision.gameObject.name == "4(Clone)")
         {
             tagFruit = 4;
             Destroy(collision.gameObject);
-            GenFruit.instantiateGenFruit.RandomMatterialFruit();
+            CheckIsCorrect();
+            //GenFruit.instantiateGenFruit.RandomMatterialFruit();
         }
         if (collision.gameObject.name == "5(Clone)")
         {
             tagFruit = 5;
             Destroy(collision.gameObject);
-            GenFruit.instantiateGenFruit.RandomMatterialFruit();
+            CheckIsCorrect();
+            //GenFruit.instantiateGenFruit.RandomMatterialFruit();
         }
-        CheckIsCorrect();
+        //CheckIsCorrect();
+        
+        //GenFruit.instantiateGenFruit.orderleft.Clear();
+        GenFruit.instantiateGenFruit.ReadytoAdd = true;
+        GenFruit.instantiateGenFruit.Readytogen = true;
     }
 
     public void CheckIsCorrect()
@@ -119,24 +133,36 @@ public class RandomOrderinBasket : MonoBehaviour
                 orderdata.RemoveAt(orderdata.Count - 1);
             }
         }*/
-
+       
         if (tagFruit == orderdata[0])
         {
             SpriteRenderer1.color = Color.clear;
             //orderdata.RemoveAt(orderdata.Count - 1);
             orderdata[0] = 0;
+            //GenFruit.instantiateGenFruit.orderleft.Clear();
+            
         }
         else if (tagFruit == orderdata[1])
         {
             SpriteRenderer2.color = Color.clear;
             //orderdata.RemoveAt(orderdata.Count - 1);
             orderdata[1] = 0;
+            //GenFruit.instantiateGenFruit.orderleft.Clear();
         }
         else if (tagFruit == orderdata[2])
         {
             SpriteRenderer3.color = Color.clear;
             //orderdata.RemoveAt(orderdata.Count - 1);
             orderdata[2] = 0;
+            //GenFruit.instantiateGenFruit.orderleft.Clear();
+        }
+        else
+        {
+            dmg = 1f;
+            //Manager.instantiateManager.Scoore--;
+            HealthBarHUDTester.Instance.TakeDamage(dmg);
+            
+            wrongorder.Add(tagFruit);
         }
     }
 
@@ -146,8 +172,9 @@ public class RandomOrderinBasket : MonoBehaviour
         if (orderdata[0] == 0 && orderdata[1] == 0 && orderdata[2] == 0)
         {
             Manager.instantiateManager.Scoore++;
-            this.Basket.SetActive(false);
-            //Destroy(this.Basket);
+            //this.Basket.SetActive(false);
+            Destroy(this.Basket);
+            //GenBasket.genBasket.randomOrderinBaskets.RemoveAt(0);
         }
     }
 
@@ -164,31 +191,31 @@ public class RandomOrderinBasket : MonoBehaviour
         if (index == 1)
         {
             Debug.Log("Red");
-            SpriteRenderer1.color = Color.red;
+            SpriteRenderer1.sprite = spritesArray[0];
             orderdata.Add(index);
         }
         if (index == 2)
         {
             Debug.Log("Blue");
-            SpriteRenderer1.color = Color.blue;
+            SpriteRenderer1.sprite = spritesArray[1];
             orderdata.Add(index);
         }
         if (index == 3)
         {
             Debug.Log("Green");
-            SpriteRenderer1.color = Color.green;
+            SpriteRenderer1.sprite = spritesArray[2];
             orderdata.Add(index);
         }
         if (index == 4)
         {
             Debug.Log("Yellow");
-            SpriteRenderer1.color = Color.yellow;
+            SpriteRenderer1.sprite = spritesArray[3];
             orderdata.Add(index);
         }
         if (index == 5)
         {
             Debug.Log("Pink");
-            SpriteRenderer1.color = Color.magenta;
+            SpriteRenderer1.sprite = spritesArray[4];
             orderdata.Add(index);
         }
 
@@ -196,31 +223,31 @@ public class RandomOrderinBasket : MonoBehaviour
         if (index2 == 1)
         {
             Debug.Log("Red");
-            SpriteRenderer2.color = Color.red;
+            SpriteRenderer2.sprite = spritesArray[0];
             orderdata.Add(index2);
         }
         if (index2 == 2)
         {
             Debug.Log("Blue");
-            SpriteRenderer2.color = Color.blue;
+            SpriteRenderer2.sprite = spritesArray[1];
             orderdata.Add(index2);
         }
         if (index2 == 3)
         {
             Debug.Log("Green");
-            SpriteRenderer2.color = Color.green;
+            SpriteRenderer2.sprite = spritesArray[2];
             orderdata.Add(index2);
         }
         if (index2 == 4)
         {
             Debug.Log("Yellow");
-            SpriteRenderer2.color = Color.yellow;
+            SpriteRenderer2.sprite = spritesArray[3];
             orderdata.Add(index2);
         }
         if (index2 == 5)
         {
             Debug.Log("Pink");
-            SpriteRenderer2.color = Color.magenta;
+            SpriteRenderer2.sprite = spritesArray[4];
             orderdata.Add(index2);
         }
 
@@ -228,31 +255,31 @@ public class RandomOrderinBasket : MonoBehaviour
         if (index3 == 1)
         {
             Debug.Log("Red");
-            SpriteRenderer3.color = Color.red;
+            SpriteRenderer3.sprite = spritesArray[0];
             orderdata.Add(index3);
         }
         if (index3 == 2)
         {
             Debug.Log("Blue");
-            SpriteRenderer3.color = Color.blue;
+            SpriteRenderer3.sprite = spritesArray[1];
             orderdata.Add(index3);
         }
         if (index3 == 3)
         {
             Debug.Log("Green");
-            SpriteRenderer3.color = Color.green;
+            SpriteRenderer3.sprite = spritesArray[2];
             orderdata.Add(index3);
         }
         if (index3 == 4)
         {
             Debug.Log("Yellow");
-            SpriteRenderer3.color = Color.yellow;
+            SpriteRenderer3.sprite = spritesArray[3];
             orderdata.Add(index3);
         }
         if (index3 == 5)
         {
             Debug.Log("Pink");
-            SpriteRenderer3.color = Color.magenta;
+            SpriteRenderer3.sprite = spritesArray[4];
             orderdata.Add(index3);
         }
     }

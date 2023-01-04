@@ -91,7 +91,7 @@ public class NewGamemanager : MonoBehaviour
 		Ball.Instance.ActivateRb();
 
 		Ball.Instance.Push(force);
-
+		
 		trajectory.Hide();
 	}
 
